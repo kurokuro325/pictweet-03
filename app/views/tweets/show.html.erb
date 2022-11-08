@@ -17,5 +17,27 @@
         <span>投稿者</span><%= @tweet.user.nickname %>
       </a>
     </span>
+    <p class="d-flex justify-content-end">
+   <% if user_signed_in? && @user == current_user %>
+   <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn-sm btn-success" %>
+   <% end %>
+   <% if current_user != @user %>
+   <% if current_user.following?(@user) %>
+   <%= link_to 'フォロー外す', user_relationships_path(@user.id), method: :delete, class: "btn-sm btn-danger" %>
+   <% else %>
+   <%= link_to 'フォローする', user_registration_path, method: :POST, class:"btn-sm btn-success" %>
+   <% end %>
+ </p>
+ <% end %>
+ <div class="ml-3 mb-3 card w-100">
+   <div class="d-flex">
+   </div>
+   <div class="d-flex">
+     <%= link_to follows_user_path do %>
+     <h6>フォロー<%= @following_users %></h6>
+     <% end %>&nbsp;&nbsp;
+     <%= link_to followers_user_path do %>
+     <h6>フォロワー<%= @follower_users %></h6>
+     <% end %>
   </div>
 </div>
