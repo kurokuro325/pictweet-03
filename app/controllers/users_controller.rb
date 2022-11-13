@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tweets = @user.posts.page(params[:page]).reverse_order
     @following_users = @user.following_user
     @follower_users = @user.follower_user
   end
